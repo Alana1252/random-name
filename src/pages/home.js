@@ -5,11 +5,7 @@ import ListName from "./list-name";
 
 export default function AcakNama(props) {
     const { listItems } = props
-    const [selectedItem, setSelectedItem] = useState([
-        // 'Levi',
-        // 'Reza',
-        // 'Pahlevi'
-    ])
+    const [selectedItem, setSelectedItem] = useState([])
     const [isLoading, setIsLoading] = useState(false)
 
     function getRndInteger(min, max) {
