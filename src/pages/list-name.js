@@ -57,7 +57,7 @@ export default function ListName() {
 
     return (
         <div >
-            <Container sx={{ my: 8 }} align="center" >
+            <Container sx={{ my: 15 }} align="center" >
                 <Card sx={{ maxWidth: 500 }} >
                     <CardContent >
                         <div><h3>List Nama</h3></div> <br />

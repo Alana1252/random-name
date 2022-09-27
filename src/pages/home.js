@@ -1,7 +1,7 @@
 import { Button, Card, List, ListItem, Stack } from "@mui/material";
 import { Container } from "@mui/system";
 import React, { useState } from 'react';
-import ListName from "./List";
+import ListName from "./list-name";
 
 export default function AcakNama(props) {
     const { listItems } = props
