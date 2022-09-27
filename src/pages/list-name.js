@@ -1,67 +1,111 @@
-import * as React from "react";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import { Container, Stack } from "@mui/system";
-import { IconButton, List, ListItem, ListItemText } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
+import { Button, Card, CardContent, IconButton, List, ListItem, ListItemText, Stack, TextField } from "@mui/material";
+import { Container } from "@mui/system";
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import { useState } from "react";
+import React from 'react';
 
-export default function ListNamePage() {
-  const [listName, setListName] = useState([{ name: "Rio Chandra" }, { name: "Alan Kamesta Ginting" }, { name: "M Reza Pahlevi" }, { name: "John Charlos" }]);
 
-  const [inputName, setinputName] = useState("");
 
-  function addListName() {
-    const prev = [...listName];
-    prev.push({
-      name: inputName,
-    });
-    setListName(prev);
-  }
-  function editListname(index) {}
 
-  function deleteListname(index) {
-    const prev = [...listName];
-    prev.splice(index, 1);
-    setListName(prev);
-  }
 
-  function OnEnterForm() {}
+export default function ListName() {
+    const [ListName, setListname] = useState([
+        { name: 'Alan' },
+        { name: 'Kamesta' },
+        { name: 'Ginting' },
+        { name: 'coba'}
+    ])
 
-  return (
-    <Container>
-      <Card sx={{ minWidth: 275 }}>
-        <CardContent>
-          <Stack direction="row" spacing={3}>
-            <TextField id="outlined-helperText" placeholder="nama baru..." size="small" value={inputName} onChange={(e) => setinputName(e.target.value)} onKeyDown={(e) => OnEnterForm} />
-            <Button size="small" variant="contained" onClick={() => addListName()}>
-              Tambah
-            </Button>
-          </Stack>
-          <List>
-            {listName.map((item, index) => (
-              <ListItem
-                key={index}
-                secondaryAction={
-                  <Stack direction="row" spacing={2}>
-                    <IconButton edge="end" aria-label="edit" onClick={() => editListname(index)}>
-                      <EditIcon />
-                    </IconButton>
-                    <IconButton edge="end" aria-label="delete" onClick={() => deleteListname(index)}>
-                      <DeleteIcon />
-                    </IconButton>
-                  </Stack>
-                }
-              >
-                <ListItemText primary={`${index + 1}. ${item.name}`} />
-              </ListItem>
-            ))}
-          </List>
-        </CardContent>
-      </Card>
-    </Container>
-  );
+    const [inputName, setInputName] = useState('')
+    const [isModeEdit, setIsModeEdit] = useState(false)
+    const [editIndex, setEditIndex] = useState()
+  
+
+    function addListName() {
+        const prev = [...ListName]
+        if (!inputName) {
+            return alert("Masukan nama terlebih dahulu");
+        }
+        prev.unshift({
+            name: inputName
+        })
+        setListname(prev)
+        setInputName('')
+    }
+
+    function editListname() {
+        const prev = [...ListName]
+        prev[editIndex].name = inputName
+        setListname(prev)
+        setInputName('')
+        setIsModeEdit(false)
+    }
+    function setModeEditFor(index) {
+        setEditIndex(index)
+        setIsModeEdit(true)
+        setInputName(ListName[index].name)
+    }
+    function deleteListname(index) {
+        console.log(index)
+        if (window.confirm("Yakin hapus data?") === true) {
+            const prev = [...ListName]
+            prev.splice(index, 1)
+            setListname(prev)
+        }
+    }
+
+    return (
+        <div >
+            <Container sx={{ my: 8 }} align="center" >
+                <Card sx={{ maxWidth: 500 }} >
+                    <CardContent >
+                        <div><h3>List Nama</h3></div> <br />
+
+                        <Stack direction='row' spacing={3}>
+                            <TextField
+                                variant="outlined"
+                                size="small"
+                                placeholder="Nama baru"
+                                value={inputName}
+                                onChange={(e) => setInputName(e.target.value)}
+                            />
+                            <Button
+                                variant="contained"
+                                onClick={() => isModeEdit ? editListname() : addListName()}
+                            >
+                                {isModeEdit ? 'Edit' : 'Tambah'}
+                            </Button>
+                        </Stack>
+                        <List>
+                            {
+                                ListName.map((item, index) => (
+                                    <ListItem
+                                        key={index}
+                                        secondaryAction={
+                                            <Stack direction="row">
+                                                <IconButton edge="end" aria-label="edit" onClick={() => setModeEditFor(index)}>
+                                                    <EditIcon />
+                                                </IconButton>
+                                                <IconButton edge="end" aria-label="delete" onClick={() => deleteListname(index)}>
+                                                    <DeleteIcon />
+                                                </IconButton>
+                                            </Stack>
+                                        }>
+                                         <ListItemText  primary={item.name}></ListItemText>
+
+                                  
+                                    </ListItem>
+                                ))
+                            }
+                        </List>
+                        Total Nama : {ListName.length}
+
+                    </CardContent>
+                </Card>
+
+            </Container>
+        
+        </div>
+    )
 }
