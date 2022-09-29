@@ -4,6 +4,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { useState } from "react";
 import React from 'react';
+import AcakNama from "./acak-nama";
+import randomItem from "./acak-nama"
 
 
 
@@ -57,7 +59,7 @@ export default function ListName() {
 
     return (
         <div >
-            <Container sx={{ my: 15 }} align="center" >
+            <Container sx={{ my: 18 }} align="center" >
                 <Card sx={{ maxWidth: 500 }} >
                     <CardContent >
                         <div><h3>List Nama</h3></div> <br />
@@ -76,8 +78,17 @@ export default function ListName() {
                             >
                                 {isModeEdit ? 'Edit' : 'Tambah'}
                             </Button>
+                            <Button
+                                variant="contained"
+                                onClick={() => randomItem()}
+                            >
+                                {'acak'}
+                            </Button>
                         </Stack>
-                        <List>
+                        <List style={{
+                            height: '200px',
+                            overflow: 'auto'
+                        }}>
                             {
                                 ListName.map((item, index) => (
                                     <ListItem
@@ -103,7 +114,7 @@ export default function ListName() {
 
                     </CardContent>
                 </Card>
-
+                <AcakNama listItems={ListName} />
             </Container>
         
         </div>
