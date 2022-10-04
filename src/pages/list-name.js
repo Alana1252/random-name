@@ -2,22 +2,23 @@ import { Button, Card, CardContent, IconButton, List, ListItem, ListItemText, St
 import { Container } from "@mui/system";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import React from 'react';
 import AcakNama from "./acak-nama";
-import randomItem from "./acak-nama"
 
 
 
 
 
-export default function ListName() {
-    const [ListName, setListname] = useState([
-        { name: 'Alan' },
-        { name: 'Kamesta' },
-        { name: 'Ginting' },
-        { name: 'coba'}
-    ])
+
+
+
+export default function ListNamePage() {
+   const [listName, setListname] = useState(JSON.parse(localStorage.getItem('listName')))
+   
+   useEffect(() => {
+       localStorage.setItem('listName' , JSON.stringify(listName))    
+   }, [listName])
 
     const [inputName, setInputName] = useState('')
     const [isModeEdit, setIsModeEdit] = useState(false)
@@ -25,7 +26,7 @@ export default function ListName() {
   
 
     function addListName() {
-        const prev = [...ListName]
+        const prev = [...listName]
         if (!inputName) {
             return alert("Masukan nama terlebih dahulu");
         }
@@ -37,7 +38,7 @@ export default function ListName() {
     }
 
     function editListname() {
-        const prev = [...ListName]
+        const prev = [...listName]
         prev[editIndex].name = inputName
         setListname(prev)
         setInputName('')
@@ -46,12 +47,12 @@ export default function ListName() {
     function setModeEditFor(index) {
         setEditIndex(index)
         setIsModeEdit(true)
-        setInputName(ListName[index].name)
+        setInputName(listName[index].name)
     }
     function deleteListname(index) {
         console.log(index)
         if (window.confirm("Yakin hapus data?") === true) {
-            const prev = [...ListName]
+            const prev = [...listName]
             prev.splice(index, 1)
             setListname(prev)
         }
@@ -78,19 +79,15 @@ export default function ListName() {
                             >
                                 {isModeEdit ? 'Edit' : 'Tambah'}
                             </Button>
-                            <Button
-                                variant="contained"
-                                onClick={() => randomItem()}
-                            >
-                                {'acak'}
-                            </Button>
+                            
+                            
                         </Stack>
                         <List style={{
                             height: '200px',
                             overflow: 'auto'
                         }}>
                             {
-                                ListName.map((item, index) => (
+                                listName.map((item, index) => (
                                     <ListItem
                                         key={index}
                                         secondaryAction={
@@ -107,16 +104,18 @@ export default function ListName() {
 
                                   
                                     </ListItem>
+                                    
                                 ))
                             }
                         </List>
-                        Total Nama : {ListName.length}
+                        Total Nama : {listName.length}
 
                     </CardContent>
                 </Card>
-                <AcakNama listItems={ListName} />
+                <AcakNama listItems={listName} />
             </Container>
         
         </div>
+        
     )
 }
