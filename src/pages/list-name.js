@@ -14,7 +14,7 @@ import AcakNama from "./acak-nama";
 
 
 export default function ListNamePage() {
-   const [listName, setListname] = useState(JSON.parse(localStorage.getItem('listName')))
+   const [listName, setListname] = useState(JSON.parse(localStorage.getItem('listName'))  || [])
    
    useEffect(() => {
        localStorage.setItem('listName' , JSON.stringify(listName))    
