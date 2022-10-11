@@ -55,7 +55,8 @@ export default function ListNamePage() {
 
     return (
         <div >
-            <Container sx={{ my: 18 }} align="center" >
+            
+            <Container sx={{ my: 20 }} align="center" >
                 <Card sx={{ maxWidth: 500 }} >
                     <CardContent >
                         <div><h3>List Nama</h3></div> <br />
@@ -96,9 +97,11 @@ export default function ListNamePage() {
                                             </Stack>
                                         }>
                                          <ListItemText  primary={item.name}></ListItemText>
+                                         
 
                                   
                                     </ListItem>
+                                    
                                     
                                 ))
                             }
@@ -108,6 +111,7 @@ export default function ListNamePage() {
                     </CardContent>
                 </Card>
                 <AcakNama listItems={listName} />
+                
             </Container>
         
         </div>

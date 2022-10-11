@@ -12,29 +12,26 @@ const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme }) => ({
   transition: theme.transitions.create(['margin', 'width'], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
+    
+    
   }),
 }));
 
 
 
 export default function PersistentDrawerRight() {
-  const [open] = React.useState(false);
-
-
 
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar style={{backgroundColor: "white"}} position="fixed"  open={open}>
+      <AppBar style={{backgroundColor: "white"}} position="fixed"  >
         <Toolbar>
         <img
                         alt="sahaware"
                         height={30}
                         marginRight="100"
                         src="sahaware.png"
-                        sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+                        sx={{ display: { xs: 'none', md: 'flex' }, }} />
                     </Toolbar>
       </AppBar>
 

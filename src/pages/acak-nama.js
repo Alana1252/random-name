@@ -12,6 +12,7 @@ export default function AcakNama(props) {
     function getRndInteger(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
+    
 
  
 
@@ -45,10 +46,11 @@ export default function AcakNama(props) {
         },100)
     }
 
-    return (
-        <Container sx={{ my: 28 }} align="center">
+    return (    
+        <Container sx={{ my: 20 }} align="center">
             <Card sx={{ maxWidth: 500 }}>
                 <div><h3>Acak Nama</h3></div>
+                
                 <Stack>
                     <List>
                     <ListItem>
@@ -85,8 +87,10 @@ export default function AcakNama(props) {
                 <div>
                     
                 </div><br />
+                
 
             </Card>
+            
         </Container>
     )
 }
